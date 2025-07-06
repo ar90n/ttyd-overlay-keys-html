@@ -42,13 +42,17 @@ jobs:
         id: get_version
         run: echo "VERSION=${GITHUB_REF#refs/tags/}" >> $GITHUB_OUTPUT
         
+      - name: Rename artifact for release
+        run: |
+          cp dist/inline.html dist/index.html
+          
       - name: Create release
         uses: softprops/action-gh-release@v1
         with:
           name: Release ${{ steps.get_version.outputs.VERSION }}
           tag_name: ${{ steps.get_version.outputs.VERSION }}
           files: |
-            dist/inline.html
+            dist/index.html
           generate_release_notes: true
           draft: false
           prerelease: false
@@ -65,7 +69,7 @@ jobs:
             - 📱 **Mobile friendly** - Responsive design for all screen sizes
             
             ### Usage
-            1. Download `inline.html` from the assets below
+            1. Download `index.html` from the assets below
             2. Embed in ttyd binary or serve directly
             3. Access via web browser for terminal session
             
@@ -75,18 +79,5 @@ jobs:
             - **Commit**: ${{ github.sha }}
             
             Forked from [tsl0922/ttyd](https://github.com/tsl0922/ttyd)
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          
-      - name: Rename artifact for release
-        run: |
-          cp dist/inline.html dist/ttyd-overlay-keyboard-${{ steps.get_version.outputs.VERSION }}.html
-          
-      - name: Upload additional artifact
-        uses: softprops/action-gh-release@v1
-        with:
-          tag_name: ${{ steps.get_version.outputs.VERSION }}
-          files: |
-            dist/ttyd-overlay-keyboard-${{ steps.get_version.outputs.VERSION }}.html
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
