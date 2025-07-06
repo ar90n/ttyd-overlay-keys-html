@@ -1,14 +1,19 @@
-## Prerequisites
+# ttyd Web Client with Overlay Keyboard
 
-> **NOTE:** yarn v2 is required.
+Customized ttyd web client with on-screen keyboard overlay support.
 
-Install [Yarn](https://yarnpkg.com/getting-started/install), and run: `yarn install`.
+Forked from [tsl0922/ttyd](https://github.com/tsl0922/ttyd)
 
-## Development
+## Features
+- Single HTML file output for embedding in ttyd binary
+- Overlay keyboard for Shift+Tab, Esc, and arrow keys
+- Built with Preact + TypeScript + xterm.js
 
-1. Start ttyd: `ttyd bash`
-2. Start the dev server: `yarn run start`
+## Build
+```bash
+npm install
+npm run build
+```
 
-## Publish
-
-Run `yarn run build`, this will compile the inlined html to `../src/html.h`.
+## Download
+Get the latest release from [GitHub Releases](https://github.com/ar90n/ttyd-overlay-keys-html/releases)
