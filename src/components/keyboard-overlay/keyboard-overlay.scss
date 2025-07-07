@@ -30,6 +30,9 @@
     transition: all 0.2s ease;
     user-select: none;
     -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
 
     &:hover {
       background-color: rgba(255, 255, 255, 0.2);
@@ -50,11 +53,12 @@
 
 .keyboard-toggle {
   position: fixed;
-  bottom: 16px;
+  top: 50%;
   right: 16px;
-  width: 48px;
-  height: 48px;
-  background-color: rgba(0, 0, 0, 0.7);
+  transform: translateY(-50%);
+  width: 120px;
+  height: 120px;
+  background-color: rgba(0, 0, 0, 0.2);
   border: 1px solid rgba(255, 255, 255, 0.3);
   border-radius: 50%;
   color: #fff;
@@ -64,9 +68,12 @@
   cursor: pointer;
   transition: all 0.2s ease;
   z-index: 1001;
+  touch-action: manipulation;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
   
   &:hover {
-    background-color: rgba(0, 0, 0, 0.8);
+    background-color: rgba(0, 0, 0, 0.4);
     border-color: rgba(255, 255, 255, 0.5);
   }
 
@@ -79,8 +86,8 @@
   }
 
   svg {
-    width: 24px;
-    height: 24px;
+    width: 54px;
+    height: 54px;
   }
 }
 
@@ -106,13 +113,30 @@
   }
 }
 
-@media (max-width: 480px) {
+// Hide keyboard overlay completely on desktop devices
+@media (hover: hover) and (pointer: fine) {
+  .keyboard-overlay,
+  .keyboard-toggle {
+    display: none;
+  }
+}
+
+// Large buttons for all touch devices (iPhone, Android, tablets)
+@media (hover: none) and (pointer: coarse) {
   .keyboard-overlay {
+    padding: 20px;
+    
+    &__buttons {
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+    
     &__button {
-      min-width: 50px;
-      height: 36px;
-      padding: 6px 12px;
-      font-size: 13px;
+      min-width: 150px;
+      height: 80px;
+      padding: 15px 20px;
+      font-size: 24px;
+      font-weight: bold;
     }
   }
 }
