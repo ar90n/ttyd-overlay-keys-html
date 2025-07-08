@@ -1,5 +1,9 @@
 # ttyd Web Client with Overlay Keyboard
 
+[![MIT license](http://img.shields.io/badge/license-MIT-brightgreen.svg)](http://opensource.org/licenses/MIT)
+![Built with vibe coding](https://img.shields.io/badge/built%20with-vibe%20coding-ff69b4)
+
+
 Customized ttyd web client with on-screen keyboard overlay support.
 
 Forked from [tsl0922/ttyd](https://github.com/tsl0922/ttyd)
