@@ -22,6 +22,48 @@ const tokenUrl = [
   path,
   '/token',
 ].join('');
+
+// Calculate appropriate font size based on viewport and device
+function calculateFontSize(): number {
+  // Check if user has a saved preference
+  try {
+    const savedSize = localStorage.getItem('ttyd-font-size');
+    if (savedSize) {
+      const size = parseInt(savedSize, 10);
+      if (!isNaN(size) && size >= 10 && size <= 24) {
+        return size;
+      }
+    }
+  } catch (e) {
+    // Ignore localStorage errors
+  }
+  
+  const width = window.innerWidth;
+  const height = window.innerHeight;
+  const pixelRatio = window.devicePixelRatio || 1;
+  
+  // Check if device is mobile based on viewport and touch capability
+  const isMobile = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+  const isPortrait = height > width;
+  
+  if (isMobile) {
+    // Mobile devices
+    if (width <= 480) {
+      // Small phones
+      return isPortrait ? 16 : 14;
+    } else if (width <= 768) {
+      // Large phones and small tablets
+      return isPortrait ? 16 : 15;
+    } else if (width <= 1024) {
+      // Tablets
+      return 15;
+    }
+  }
+  
+  // Desktop or large tablets
+  return 13;
+}
+
 const clientOptions = {
   rendererType: 'webgl',
   disableLeaveAlert: false,
@@ -34,7 +76,7 @@ const clientOptions = {
   unicodeVersion: '11',
 } as ClientOptions;
 const termOptions = {
-  fontSize: 13,
+  fontSize: calculateFontSize(),
   fontFamily: 'Consolas,Liberation Mono,Menlo,Courier,monospace',
   theme: {
     foreground: '#d2d2d2',
