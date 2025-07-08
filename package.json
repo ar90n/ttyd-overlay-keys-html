@@ -1,7 +1,7 @@
 {
   "private": true,
   "name": "ttyd",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Share your terminal over the web",
   "repository": {
     "url": "git@github.com:tsl0922/ttyd.git",
